@@ -1,0 +1,60 @@
+System Overview
+===================================================
+The starter program was able to take a Scene.Any file and display a 3d image based on the information in that file.  The program App.cpp is run which finds and parses all of the Scene.Any Files it can find, then it creates a window with one chosen by the loadImage call in the onInit function.
+
+I added 4 scene files and modified the App.cpp and App.h starter files.  The three scene files are whiteCube.Scene.Any, cornellBox.Scene.Any, staircase.Scene.Any, and Custom.Scene.Any.  White cube is a very simple scene file that creates an instance of a 1 meter white cube model and places it at point (0, 0, -2) in a white room.  Cornell Box is another simple scene of a room containing 2 cubes with 4 lights going in all four directions placed on top.  It uses 3 different wall modes of different colors and 2 other cube models of different heights to create the scene and cast shadows.  Staircase is a scene file created procedurally from 2 methods I wrote in App.cpp: makeStairs and createScene.  App.h was also altered to include these two new methods in App.cpp.  The method makeStairs takes no parameters and returns a String that is the contents of the staircase.Scene.Any file including model for the stair object and using a for loop to create 50 of them and arranging them such that they appear as a spiral staircase.  The method createScene takes a String filename, creates a TextOutput with that filename, writes the contents of a call to makeStairs, and commits it to create the staircase.Scene.Any file.  createScene was called in onInit once in order to create the scene file, but the line was removed so it isn’t recreated every time the program is run.  Custom is a scene that contains 8 different models and over 100 entities to create a 10 red solo cups arranged in a triangle with a white ping pong ball above them.  Each cup is composed of 16 different cube entities including a textured crate to make it look like it is filled with beer.
+
+onInit(file:///C:/Users/cs371/jcf1/0-cubes/build/doc/class_app.html#a383cf8e8949745f9b2b10651b27d1724)
+
+makeStairs(file:///C:/Users/cs371/jcf1/0-cubes/build/doc/class_app.html#ae4e553f344e38d779fd56d8d3233351e)
+
+createScene(file:///C:/Users/cs371/jcf1/0-cubes/build/doc/class_app.html#a533676df4cd51af4aa5d2cdf2c156ee9)
+
+
+
+Coordinate System
+===================================================
+![Labled Axis](IMG_0599.JPG)
+
+
+Results
+===================================================
+
+![My White Cube](2016-09-12_004_starter_r287_g3d_r762__My_White_Cube.jpg)
+
+![My Cornell Box](Cornell-Box.jpg)
+
+![My Staircase](2016-09-12_002_starter_r287_g3d_r762__Spiral_Staircase_from_the_side.jpg)
+
+![My Custom Sceneof Beer Pong](2016-09-12_003_starter_r287_g3d_r762__My_Custom_Scene.jpg)
+
+I was having some trouble coming up with an idea for a scene, but I ended up making a small beer pong scene involving 10 cups arranged in a triangle.  First,I had to figure out how I wanted to make the cups and ended up deciding on using 16 block entities from 7 models for each cup in the scene: 4 red outside walls, 4 white inside walls, 4 white rim pieces, a red outside bottom, a white inside bottom, a slightly narrower stand, and a textured crate for the beer.  I then created 10 instances of this cup and arranged them into a pyramid structure such that row and column was created uniformly.  I ended up doing this creating by hand, and if I were to do it again, I would definitely write a program to generate this code, but at the beginning I wanted to just easily manipulate the blocks by hand while I was deciding what I wanted to do.  I also added a white cub above the cups as a ball and changed the camera in the scene to make it look more cinematic.
+
+$$
+\frac{df(x)}{dx} = \lim_{h\to0} \Big[\frac{f(x + h) - f(x - h)}{2h}\Big]
+$$
+
+Questions
+===================================================
+1. A shared_ptr allows for garbage collection in C++ by allowing the object being pointed at to keep track of the number of pointers poiting at it.  When that count reaches 0, it is safe to free that memory since the object cannot be reached.  A normal pointer like Scene* does not allow an object to do this, but instead makes the user free the memory themselves.
+
+2. By default, G3D looks for scene files in the current directory, whatever is specified by the G3D10DATA enviormental variable, and the directory containing System::findDataFile("scene/CornellBox-Glossy.scn.any") if not already invluded in G3D10Data.
+
+3. This allows you to not need a large number of overloaded constructors since having initialization code in onInit means the constructor just need to call it.  Also, if you were to put your initialization code in the constructor instead of the onInit method, you would get much less helpful exception information since there is no object since it is being built when the exception is thrown.
+
+4. WinMain() -> G3D_WinMain() -> main() -> run() -> onRun() -> beginRun() -> onInit() -> loadScene() -> onGraphics() -> onGraphics3D()
+
+5. It is located in the file g3d\G3D10\build\data\model\cube.  It is given the filename in the Scene file, and since it has a search path to get to data, it can then look in the extension we give to it.
+
+6. The first 3 parameters are similar to the parameters of Color3 which contral the ratios of different colors to form a spectrum, then the final parameter allows one to affect how light should react with the surface; whether it be to make light "bounce" off the surface to make it look more matallic, or pass right through to make it look transluscent, etc.
+
+Reflection
+===================================================
+I learned a lot about the framework we will be using for the rest of the course like g3d, some C++, and visual studio.  I also got to learn how much fun and time consuming graphics is.
+
+Time
+===================================================
+I spent 12:15 hours on the coding requirement for this lab, and 3:30 hours on the report.
+
+<!-- Markdeep: -->
+<style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace;}</style><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>

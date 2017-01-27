@@ -1,0 +1,878 @@
+// -*- c++ -*-
+{
+    name = "Beer Pong";
+    
+    models = {
+       outsideWall = ArticulatedModel::Specification {
+            filename = "model/cube/cube.obj";
+            preprocess = {
+                setMaterial(all(), Color3(1, 0, 0));
+                transformGeometry(all(), Matrix4::scale(0.01, 4.0, 2.0));
+            };
+       };
+       insideWall = ArticulatedModel::Specification {
+            filename = "model/cube/cube.obj";
+            preprocess = {
+                setMaterial(all(), Color3(1, 1, 1));
+                transformGeometry(all(), Matrix4::scale(0.01, 4.0, 2.0));
+            };
+       };
+       rimCube = ArticulatedModel::Specification {
+            filename = "model/cube/cube.obj";
+            preprocess = {
+                setMaterial(all(), Color3(1, 1, 1));
+                transformGeometry(all(), Matrix4::scale(0.1, 0.2, 2.0));
+            };
+       };
+       outsideBottom = ArticulatedModel::Specification {
+            filename = "model/cube/cube.obj";
+            preprocess = {
+                setMaterial(all(), Color3(1, 0, 0));
+                transformGeometry(all(), Matrix4::scale(2.0, 2.0, 0.01));
+            };
+       };
+       footCube = ArticulatedModel::Specification {
+            filename = "model/cube/cube.obj";
+            preprocess = {
+                setMaterial(all(), Color3(1, 0, 0));
+                transformGeometry(all(), Matrix4::scale(1.75, 1.75, 0.25));
+            };
+       };
+       insideBottom = ArticulatedModel::Specification {
+            filename = "model/cube/cube.obj";
+            preprocess = {
+                setMaterial(all(), Color3(1, 1, 1));
+                transformGeometry(all(), Matrix4::scale(2.0, 2.0, 0.01));
+            };
+       };
+       ball = ArticulatedModel::Specification {
+            filename = "model/cube/cube.obj";
+            preprocess = {
+                setMaterial(all(), Color3(1, 1, 1));
+                transformGeometry(all(), Matrix4::scale(1.0, 1.0, 1.0));
+            };
+       };
+       beer = ArticulatedModel::Specification {
+            filename = "model/crate/crate.obj";
+            preprocess = {
+                setMaterial(all(), "beer_foam.jpg");
+                transformGeometry(all(), Matrix4::scale(2.0, 2.0, 2.0));
+            };
+       };
+    };
+    
+    entities = {
+       skybox = Skybox {
+            texture = "cubemap/noonclouds/noonclouds_*.png";
+       };
+
+        cube0 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(0, 0, 0, 0, 0, 0);
+        };
+
+        cube1 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-2, 0, 0, 0, 0, 0);
+        };
+
+        cube2 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, 1, 90, 0, 0);
+        };
+
+        cube3 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, -1, 90, 0, 0);
+        };
+
+         cube4 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-.01, 0, 0, 0, 0, 0);
+        };
+
+        cube5 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1.99, 0, 0, 0, 0, 0);
+        };
+
+        cube6 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, 0.99, 90, 0, 0);
+        };
+
+        cube7 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, -0.99, 90, 0, 0);
+        };
+
+        cube8 = VisibleEntity {
+            model = "outsideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-1, -2, 0, 0, 90, 0);
+        };
+
+        cube9 = VisibleEntity {
+            model = "insideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-1, -1.99, 0, 0, 90, 0);
+        };
+
+        cube10 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(0, 2, 0, 0, 0, 0);
+        };
+
+        cube11 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-2, 2, 0, 0, 0, 0);
+        };
+
+        cube12 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-1, 2, -1, 90, 0, 0);
+        };
+
+        cube13 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-1, 2, 1, 90, 0, 0);
+        };
+
+        cube14 = VisibleEntity {
+            model = "footCube";
+            frame = CFrame::fromXYZYPRDegrees(-1, -2.126, 0, 0, 90, 0);
+        };
+
+        cube15 = VisibleEntity {
+            model = "beer";
+            frame = CFrame::fromXYZYPRDegrees(-1, -1, 0, 0, 0, 0);
+        };
+
+        cube16 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(0, 0, -3, 0, 0, 0);
+        };
+
+        cube17 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-2, 0, -3, 0, 0, 0);
+        };
+
+        cube18 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, -2, 90, 0, 0);
+        };
+
+        cube19 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, -4, 90, 0, 0);
+        };
+
+         cube20 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-.01, 0, -3, 0, 0, 0);
+        };
+
+        cube21 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1.99, 0, -3, 0, 0, 0);
+        };
+
+        cube22 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, -2.01, 90, 0, 0);
+        };
+
+        cube23 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, -3.99, 90, 0, 0);
+        };
+
+        cube24 = VisibleEntity {
+            model = "outsideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-1, -2, -3, 0, 90, 0);
+        };
+
+        cube25 = VisibleEntity {
+            model = "insideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-1, -1.99, -3, 0, 90, 0);
+        };
+
+        cube26 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(0, 2, -3, 0, 0, 0);
+        };
+
+        cube27 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-2, 2, -3, 0, 0, 0);
+        };
+
+        cube28 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-1, 2, -4, 90, 0, 0);
+        };
+
+        cube29 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-1, 2, -2, 90, 0, 0);
+        };
+
+        cube30 = VisibleEntity {
+            model = "footCube";
+            frame = CFrame::fromXYZYPRDegrees(-1, -2.126, -3, 0, 90, 0);
+        };
+
+        cube31 = VisibleEntity {
+            model = "beer";
+            frame = CFrame::fromXYZYPRDegrees(-1, -1, -3, 0, 0, 0);
+        };
+
+        cube32 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(0, 0, 3, 0, 0, 0);
+        };
+
+        cube33 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-2, 0, 3, 0, 0, 0);
+        };
+
+        cube34 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, 2, 90, 0, 0);
+        };
+
+        cube35 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, 4, 90, 0, 0);
+        };
+
+         cube36 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-.01, 0, 3, 0, 0, 0);
+        };
+
+        cube37 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1.99, 0, 3, 0, 0, 0);
+        };
+
+        cube38 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, 3.99, 90, 0, 0);
+        };
+
+        cube39 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-1, 0, 2.01, 90, 0, 0);
+        };
+
+        cube40 = VisibleEntity {
+            model = "outsideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-1, -2, 3, 0, 90, 0);
+        };
+
+        cube41 = VisibleEntity {
+            model = "insideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-1, -1.99, 3, 0, 90, 0);
+        };
+
+        cube42 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(0, 2, 3, 0, 0, 0);
+        };
+
+        cube43 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-2, 2, 3, 0, 0, 0);
+        };
+
+        cube44 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-1, 2, 4, 90, 0, 0);
+        };
+
+        cube45 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-1, 2, 2, 90, 0, 0);
+        };
+
+        cube46 = VisibleEntity {
+            model = "footCube";
+            frame = CFrame::fromXYZYPRDegrees(-1, -2.126, 3, 0, 90, 0);
+        };
+
+        cube47 = VisibleEntity {
+            model = "beer";
+            frame = CFrame::fromXYZYPRDegrees(-1, -1, 3, 0, 0, 0);
+        };
+
+        cube48 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-3, 0, 1.5, 0, 0, 0);
+        };
+
+        cube49 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-5, 0, 1.5, 0, 0, 0);
+        };
+
+        cube50 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-4, 0, 2.5, 90, 0, 0);
+        };
+
+        cube51 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-4, 0, 0.5, 90, 0, 0);
+        };
+
+        cube52 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-3.01, 0, 1.5, 0, 0, 0);
+        };
+
+        cube53 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-4.99, 0, 1.5, 0, 0, 0);
+        };
+
+        cube54 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-4, 0, 2.49, 90, 0, 0);
+        };
+
+        cube55 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-4, 0, 0.51, 90, 0, 0);
+        };
+
+        cube56 = VisibleEntity {
+            model = "outsideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-4, -2, 1.5, 0, 90, 0);
+        };
+
+        cube57 = VisibleEntity {
+            model = "insideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-4, -1.99, 1.5, 0, 90, 0);
+        };
+
+        cube58 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-5, 2, 1.5, 0, 0, 0);
+        };
+
+        cube59 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-3, 2, 1.5, 0, 0, 0);
+        };
+
+        cube60 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-4, 2, 0.5, 90, 0, 0);
+        };
+
+        cube61 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-4, 2, 2.5, 90, 0, 0);
+        };
+
+        cube62 = VisibleEntity {
+            model = "footCube";
+            frame = CFrame::fromXYZYPRDegrees(-4, -2.126, 1.5, 0, 90, 0);
+        };
+
+        cube63 = VisibleEntity {
+            model = "beer";
+            frame = CFrame::fromXYZYPRDegrees(-4, -1, 1.5, 0, 0, 0);
+        };
+
+        cube64 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-3, 0, -1.5, 0, 0, 0);
+        };
+
+         cub65 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-5, 0, -1.5, 0, 0, 0);
+        };
+
+        cube66 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-4, 0, -0.5, 90, 0, 0);
+        };
+
+        cub67 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-4, 0, -2.5, 90, 0, 0);
+        };
+
+         cube68 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-3.01, 0, -1.5, 0, 0, 0);
+        };
+
+        cube69 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-4.99, 0, -1.5, 0, 0, 0);
+        };
+
+        cube70 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-4, 0, -0.51, 90, 0, 0);
+        };
+
+        cube71 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-4, 0, -2.49, 90, 0, 0);
+        };
+
+        cube72 = VisibleEntity {
+            model = "outsideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-4, -2, -1.5, 0, 90, 0);
+        };
+
+        cube73 = VisibleEntity {
+            model = "insideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-4, -1.99, -1.5, 0, 90, 0);
+        };
+
+        cube74 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-3, 2, -1.5, 0, 0, 0);
+        };
+
+        cube75 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-5, 2, -1.5, 0, 0, 0);
+        };
+
+        cube76 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-4, 2, -2.5, 90, 0, 0);
+        };
+
+        cube77 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-4, 2, -0.5, 90, 0, 0);
+        };
+
+        cube78 = VisibleEntity {
+            model = "footCube";
+            frame = CFrame::fromXYZYPRDegrees(-4, -2.126, -1.5, 0, 90, 0);
+        };
+
+        cube79 = VisibleEntity {
+            model = "beer";
+            frame = CFrame::fromXYZYPRDegrees(-4, -1, -1.5, 0, 0, 0);
+        };
+
+        cube80 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-6, 0, 0, 0, 0, 0);
+        };
+
+         cube81 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-8, 0, 0, 0, 0, 0);
+        };
+
+        cube82 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-7, 0, 1, 90, 0, 0);
+        };
+
+        cube83 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(-7, 0, -1, 90, 0, 0);
+        };
+
+         cube84 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-6.01, 0, 0, 0, 0, 0);
+        };
+
+        cube85 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-7.99, 0, 0, 0, 0, 0);
+        };
+
+        cube86 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-7, 0, 0.99, 90, 0, 0);
+        };
+
+        cube87 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(-7, 0, -0.99, 90, 0, 0);
+        };
+
+        cube88 = VisibleEntity {
+            model = "outsideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-7, -2, 0, 0, 90, 0);
+        };
+
+        cube89 = VisibleEntity {
+            model = "insideBottom";
+            frame = CFrame::fromXYZYPRDegrees(-7, -1.99, 0, 0, 90, 0);
+        };
+
+        cube90 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-6, 2, 0, 0, 0, 0);
+        };
+
+        cube91 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-8, 2, 0, 0, 0, 0);
+        };
+
+        cube92 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-7, 2, -1, 90, 0, 0);
+        };
+
+        cube93 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(-7, 2, 1, 90, 0, 0);
+        };
+
+        cube94 = VisibleEntity {
+            model = "footCube";
+            frame = CFrame::fromXYZYPRDegrees(-7, -2.126, 0, 0, 90, 0);
+        };
+
+        cube95 = VisibleEntity {
+            model = "beer";
+            frame = CFrame::fromXYZYPRDegrees(-7, -1, 0, 0, 0, 0);
+        };
+
+        cube96 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(3, 0, 1.5, 0, 0, 0);
+        };
+
+        cube97 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(1, 0, 1.5, 0, 0, 0);
+        };
+
+        cube98 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, 2.5, 90, 0, 0);
+        };
+
+        cube99 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, 0.5, 90, 0, 0);
+        };
+
+         cube100 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2.99, 0, 1.5, 0, 0, 0);
+        };
+
+        cube101 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(1.01, 0, 1.5, 0, 0, 0);
+        };
+
+        cube102 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, 2.49, 90, 0, 0);
+        };
+
+        cube103 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, 0.51, 90, 0, 0);
+        };
+
+        cube104 = VisibleEntity {
+            model = "outsideBottom";
+            frame = CFrame::fromXYZYPRDegrees(2, -2, 1.5, 0, 90, 0);
+        };
+
+        cube105 = VisibleEntity {
+            model = "insideBottom";
+            frame = CFrame::fromXYZYPRDegrees(2, -1.99, 1.5, 0, 90, 0);
+        };
+
+        cube106 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(3, 2, 1.5, 0, 0, 0);
+        };
+
+        cube107 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(1, 2, 1.5, 0, 0, 0);
+        };
+
+        cube108 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(2, 2, 0.5, 90, 0, 0);
+        };
+
+        cube109 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(2, 2, 2.5, 90, 0, 0);
+        };
+
+        cube110 = VisibleEntity {
+            model = "footCube";
+            frame = CFrame::fromXYZYPRDegrees(2, -2.126, 1.5, 0, 90, 0);
+        };
+
+        cube111 = VisibleEntity {
+            model = "beer";
+            frame = CFrame::fromXYZYPRDegrees(2, -1, 1.5, 0, 0, 0);
+        };
+
+        cube112 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(3, 0, -1.5, 0, 0, 0);
+        };
+
+        cube113 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(1, 0, -1.5, 0, 0, 0);
+        };
+
+        cube114 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, -0.5, 90, 0, 0);
+        };
+
+        cube115 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, -2.5, 90, 0, 0);
+        };
+
+        cube116 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2.99, 0, -1.5, 0, 0, 0);
+        };
+
+        cube117 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(1.01, 0, -1.5, 0, 0, 0);
+        };
+
+        cube118 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, -0.51, 90, 0, 0);
+        };
+
+        cube119 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, -2.49, 90, 0, 0);
+        };
+
+        cube120 = VisibleEntity {
+            model = "outsideBottom";
+            frame = CFrame::fromXYZYPRDegrees(2, -2, -1.5, 0, 90, 0);
+        };
+
+        cube121 = VisibleEntity {
+            model = "insideBottom";
+            frame = CFrame::fromXYZYPRDegrees(2, -1.99, -1.5, 0, 90, 0);
+        };
+
+        cube122 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(3, 2, -1.5, 0, 0, 0);
+        };
+
+        cube123 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(1, 2, -1.5, 0, 0, 0);
+        };
+
+        cube124 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(2, 2, -2.5, 90, 0, 0);
+        };
+
+        cube125 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(2, 2, -0.5, 90, 0, 0);
+        };
+
+        cube126 = VisibleEntity {
+            model = "footCube";
+            frame = CFrame::fromXYZYPRDegrees(2, -2.126, -1.5, 0, 90, 0);
+        };
+
+        cube127 = VisibleEntity {
+            model = "beer";
+            frame = CFrame::fromXYZYPRDegrees(2, -1, -1.5, 0, 0, 0);
+        };
+
+        cube128 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(3, 0, -4.5, 0, 0, 0);
+        };
+
+        cube129 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(1, 0, -4.5, 0, 0, 0);
+        };
+
+        cube130 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, -3.5, 90, 0, 0);
+        };
+
+        cube131 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, -5.5, 90, 0, 0);
+        };
+
+         cube132 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2.99, 0, -4.5, 0, 0, 0);
+        };
+
+        cube133 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(1.01, 0, -4.5, 0, 0, 0);
+        };
+
+        cube134 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, -3.51, 90, 0, 0);
+        };
+
+        cube135 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, -5.49, 90, 0, 0);
+        };
+
+        cube136 = VisibleEntity {
+            model = "outsideBottom";
+            frame = CFrame::fromXYZYPRDegrees(2, -2, -4.5, 0, 90, 0);
+        };
+
+        cube137 = VisibleEntity {
+            model = "insideBottom";
+            frame = CFrame::fromXYZYPRDegrees(2, -1.99, -4.5, 0, 90, 0);
+        };
+
+        cube138 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(3, 2, -4.5, 0, 0, 0);
+        };
+
+        cube139 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(1, 2, -4.5, 0, 0, 0);
+        };
+
+        cube140 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(2, 2, -5.5, 90, 0, 0);
+        };
+
+        cube141 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(2, 2, -3.5, 90, 0, 0);
+        };
+
+        cube142 = VisibleEntity {
+            model = "footCube";
+            frame = CFrame::fromXYZYPRDegrees(2, -2.126, -4.5, 0, 90, 0);
+        };
+
+        cube143 = VisibleEntity {
+            model = "beer";
+            frame = CFrame::fromXYZYPRDegrees(2, -1, -4.5, 0, 0, 0);
+        };
+
+        cube144 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(3, 0, 4.5, 0, 0, 0);
+        };
+
+        cube145 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(1, 0, 4.5, 0, 0, 0);
+        };
+
+        cube146 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, 5.5, 90, 0, 0);
+        };
+
+        cube147 = VisibleEntity {
+            model = "outsideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, 3.5, 90, 0, 0);
+        };
+
+           cube148 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2.99, 0, 4.5, 0, 0, 0);
+        };
+
+        cube149 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(1.01, 0, 4.5, 0, 0, 0);
+        };
+
+        cube150 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, 5.49, 90, 0, 0);
+        };
+
+        cube151 = VisibleEntity {
+            model = "insideWall";
+            frame = CFrame::fromXYZYPRDegrees(2, 0, 3.51, 90, 0, 0);
+        };
+
+        cube152 = VisibleEntity {
+            model = "outsideBottom";
+            frame = CFrame::fromXYZYPRDegrees(2, -2, 4.5, 0, 90, 0);
+        };
+
+        cube153 = VisibleEntity {
+            model = "insideBottom";
+            frame = CFrame::fromXYZYPRDegrees(2, -1.99, 4.5, 0, 90, 0);
+        };
+
+        cube154 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(3, 2, 4.5, 0, 0, 0);
+        };
+
+        cube155 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(1, 2, 4.5, 0, 0, 0);
+        };
+
+        cube156 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(2, 2, 3.5, 90, 0, 0);
+        };
+
+        cube157 = VisibleEntity {
+            model = "rimCube";
+            frame = CFrame::fromXYZYPRDegrees(2, 2, 5.5, 90, 0, 0);
+        };
+
+        cube158 = VisibleEntity {
+            model = "footCube";
+            frame = CFrame::fromXYZYPRDegrees(2, -2.126, 4.5, 0, 90, 0);
+        };
+
+        cube159 = VisibleEntity {
+            model = "beer";
+            frame = CFrame::fromXYZYPRDegrees(2, -1, 4.5, 0, 0, 0);
+        };
+
+        cube160 = VisibleEntity {
+            model = "ball";
+            frame = CFrame::fromXYZYPRDegrees(-6, 9, 0, 45, 45, 0);
+        };
+
+        camera = Camera {
+            frame = CFrame::fromXYZYPRDegrees(-11, 16.5, 9.4, -46.0, -43.5);
+        };
+    };
+};
